@@ -17,7 +17,7 @@ install.packages("logistf")
 
 # Or the development version from GitHub:
 # install.packages("devtools")
-devtools::install_github("georgheinze/logistf")
+devtools::install_github("yifanfan1998/logistf")
 ```
 
 ## Usage
