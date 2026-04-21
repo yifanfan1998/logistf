@@ -281,7 +281,8 @@ function(formula, data, pl = TRUE, alpha = 0.05, control, plcontrol, modcontrol,
             modcontrolpl$terms.fit <- tofit
             fit.i<-logistf.fit(x,y, weight=weight, offset=offset, firth, control=control, modcontrol = modcontrolpl)
             pl.iter[i,3]<-fit.i$iter
-            fit$prob[i] <- 1-pchisq(2*(fit.full$loglik-fit.i$loglik),1)
+            #fit$prob[i] <- 1-pchisq(2*(fit.full$loglik-fit.i$loglik),1)
+            fit$prob[i] <- pchisq(2*(fit.full$loglik-fit.i$loglik), 1, lower.tail = FALSE)
             fit$method.ci[i] <- "Profile Likelihood"
         }
           
