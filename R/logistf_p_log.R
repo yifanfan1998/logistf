@@ -132,7 +132,7 @@
 #' 
 #' @seealso [add1.logistf()], [anova.logistf()]
 #' @rdname logistf
-logistf <-
+logistf_p_log <-
 function(formula, data, pl = TRUE, alpha = 0.05, control, plcontrol, modcontrol, firth = TRUE, init, weights, na.action, offset, plconf=NULL,flic=FALSE, model = TRUE, ...){
    call <- match.call()
    if(missing(control)) control<-logistf.control()
