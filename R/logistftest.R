@@ -154,7 +154,7 @@ function(object, test, values, firth = TRUE, beta0, weights, control, modcontrol
     fit <- list(testcov = offset1, 
                 loglik = loglik, 
                 df = k2, 
-                prob = 1 - pchisq(-2 * (loglik['null']-loglik['full']), k2), 
+                prob = pchisq(-2 * (loglik['null']-loglik['full']), k2, lower.tail = FALSE), 
                 call = match.call(), 
                 beta = beta)
     if(firth) {
@@ -166,4 +166,3 @@ function(object, test, values, firth = TRUE, beta0, weights, control, modcontrol
     attr(fit, "class") <- "logistftest"
     fit
 }
-
