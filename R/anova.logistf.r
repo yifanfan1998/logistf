@@ -92,7 +92,7 @@ anova.logistf<-function(object,  fit2, formula, method="nested", ...){
     PLR2<- -2 * (fit2$loglik['null']-fit2$loglik['full'])
     chisq<-PLR1-PLR2
     if (chisq<0) chisq<-0
-    pval<-1-pchisq(chisq,df)
+    pval<-pchisq(chisq,df,lower.tail = FALSE)
     model2<-as.character(fit2$formula)
   } else if(method=="nested"){
     f1<-fit1$formula
@@ -164,4 +164,3 @@ print.anova.logistf <-function(x,...){
     cat("\nMethod: ", obj$method, "\n")
     cat("Chi-Squared: ", obj$chisq, "  df=",obj$df,"  P=", obj$pval,"\n")
 }
-
