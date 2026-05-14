@@ -235,13 +235,15 @@ function(formula, data, pl = TRUE, alpha = 0.05, control, plcontrol, modcontrol,
       var.red <- fit$var[modcontrol$terms.fit,modcontrol$terms.fit]
       vars <- diag(as.matrix(var.red))
       waldprob <- wald_ci.lower <- wald_ci.upper <- vector(length = k)
-      waldprob[modcontrol$terms.fit] <- 1 - pchisq((beta[modcontrol$terms.fit]^2/vars), 1)
+      #waldprob[modcontrol$terms.fit] <- 1 - pchisq((beta[modcontrol$terms.fit]^2/vars), 1)
+      waldprob[modcontrol$terms.fit] <- pchisq((beta[modcontrol$terms.fit]^2/vars), 1, lower.tail = FALSE)
       wald_ci.lower[modcontrol$terms.fit] <- as.vector(beta[modcontrol$terms.fit] + qnorm(alpha/2) * vars^0.5)
       wald_ci.upper[modcontrol$terms.fit] <- as.vector(beta[modcontrol$terms.fit] + qnorm(1 - alpha/2) * vars^0.5)
     }
     else {
       vars <- diag(covs)
-      waldprob <- 1 - pchisq((beta^2/vars), 1)
+      #waldprob <- 1 - pchisq((beta^2/vars), 1)
+      waldprob <- pchisq((beta^2/vars), 1, lower.tail = FALSE)
       wald_ci.lower <- as.vector(beta + qnorm(alpha/2) * vars^0.5)
       wald_ci.upper <- as.vector(beta + qnorm(1 - alpha/2) * vars^0.5)
     }
@@ -485,13 +487,15 @@ function(formula, data, pl = TRUE, alpha = 0.05, control, plcontrol, modcontrol,
       var.red <- fit$var[modcontrol$terms.fit,modcontrol$terms.fit]
       vars <- diag(as.matrix(var.red))
       waldprob <- wald_ci.lower <- wald_ci.upper <- vector(length = k)
-      waldprob[modcontrol$terms.fit] <- 1 - pchisq((beta[modcontrol$terms.fit]^2/vars), 1)
+      #waldprob[modcontrol$terms.fit] <- 1 - pchisq((beta[modcontrol$terms.fit]^2/vars), 1)
+      waldprob[modcontrol$terms.fit] <- pchisq((beta[modcontrol$terms.fit]^2/vars), 1, lower.tail = FALSE, log.p = TRUE)
       wald_ci.lower[modcontrol$terms.fit] <- as.vector(beta[modcontrol$terms.fit] + qnorm(alpha/2) * vars^0.5)
       wald_ci.upper[modcontrol$terms.fit] <- as.vector(beta[modcontrol$terms.fit] + qnorm(1 - alpha/2) * vars^0.5)
     }
     else {
       vars <- diag(covs)
-      waldprob <- 1 - pchisq((beta^2/vars), 1)
+      #waldprob <- 1 - pchisq((beta^2/vars), 1)
+      waldprob <- pchisq((beta^2/vars), 1, lower.tail = FALSE, log.p = TRUE)
       wald_ci.lower <- as.vector(beta + qnorm(alpha/2) * vars^0.5)
       wald_ci.upper <- as.vector(beta + qnorm(1 - alpha/2) * vars^0.5)
     }
